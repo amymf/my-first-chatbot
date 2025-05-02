@@ -39,7 +39,7 @@ class TransformerDecoder(nn.Module):
         seq_len = x.size(1)
         x += self.positional_encoding[:, :seq_len, :]
         for layer in self.layers:
-            x = layer(x, encoder_output, tgt_mask=self.generate_square_subsequent_mask(seq_len), tgt_key_padding_mask=padding_mask)
+            x = layer(x, encoder_output, tgt_mask=self.generate_square_subsequent_mask(seq_len).to(x.device), tgt_key_padding_mask=padding_mask)
         return x
     
     
